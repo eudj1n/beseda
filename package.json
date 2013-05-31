@@ -1,0 +1,17 @@
+{
+    "name": "beseda",
+    "version": "0.0.2",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "*",
+        "jade": "*",
+        "stylus": "*",
+        "nib": "*",
+        "socket.io": "*",
+        "i18n" : "*",
+        "validator": "*"
+    }
+}
