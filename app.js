@@ -9,7 +9,7 @@ var express = require('express')
     , sio = require('socket.io')
     , util = require('util')
     , i18n = require('i18n')
-    , sanitize = require('validator').sanitize
+    , sanitize = require('validator')
     , online = 0
     , total = 0
     , free = 0;
@@ -32,13 +32,11 @@ i18n.configure({
 /**
  * Set application configuration.
  */
-app.configure(function () {
-    app.use(i18n.init);
-    app.use(app.router);
-    app.use(express.static(__dirname + '/public'));
-    app.set('views', __dirname);
-    app.set('view engine', 'jade');
-});
+app.use(i18n.init);
+app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname);
+app.set('view engine', 'jade');
+
 
 /**
  * Register helpers for use in templates
@@ -95,7 +93,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('user message', function (msg) {
 
-        msg = sanitize(msg).entityEncode();
+        msg = sanitize.toString(msg);
 
         if (debug)
             util.log('Message from ' + socket.user_id + ' to room ' + room_id + ": " + msg);
